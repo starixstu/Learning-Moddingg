@@ -25,7 +25,15 @@ jobs:
           distribution: 'microsoft'
           
       - name: Make Gradle Executable
-        run: chmod +x gradlew
+        run: |
+          if [ -f "gradlew" ]; then
+            chmod +x gradlew
+          else
+            echo "ERROR: gradlew file not found in the root!"
+            ls -R # This will show us exactly what IS in your zip
+            exit 1
+          fi
+          
         
       - name: Build with Gradle
         run: ./gradlew build
