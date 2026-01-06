@@ -7,13 +7,13 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Unzip Project
-        run: unzip -o *.zip
+        # We are now telling it exactly which file to look for
+        run: unzip -o build.zip
         
       - name: Find and Move Files
         run: |
-          # This fnds the folder containing gradlew and moves everything to the root
           SUBFOLDER=$(find . -name gradlew -printf '%h\n' | head -n 1)
-          if [ "$SUBFOLDER" != "." ]; then
+          if [ "$SUBFOLDER" != "." ] && [ -n "$SUBFOLDER" ]; then
             echo "Moving files from $SUBFOLDER to root"
             mv "$SUBFOLDER"/* .
           fi
