@@ -1,1 +1,30 @@
 
+name: Build Mod from Zip
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Unzip Project
+        run: unzip -o *.zip  # This extracts your zip file automatically
+        
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'microsoft'
+          
+      - name: Make Gradle Executable
+        run: chmod +x gradlew
+        
+      - name: Build with Gradle
+        run: ./gradlew build
+        
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: FinishedMod
+          path: build/libs/*.jar
+          
