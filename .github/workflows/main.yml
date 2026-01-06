@@ -11,7 +11,7 @@ jobs:
         
       - name: Find and Move Files
         run: |
-          # This finds the folder containing gradlew and moves everything to the root
+          # This fnds the folder containing gradlew and moves everything to the root
           SUBFOLDER=$(find . -name gradlew -printf '%h\n' | head -n 1)
           if [ "$SUBFOLDER" != "." ]; then
             echo "Moving files from $SUBFOLDER to root"
