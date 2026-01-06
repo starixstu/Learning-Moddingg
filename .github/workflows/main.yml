@@ -8,7 +8,7 @@ jobs:
       
       - name: Unzip Project
         # We are now telling it exactly which file to look for
-        run: unzip -o build.zip
+        run: unzip -o moddy.zip
         
       - name: Find and Move Files
         run: |
